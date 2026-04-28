@@ -10,7 +10,6 @@ from ultralytics import YOLO
 
 from paddle_attr import PaddleAttributeExtractor
 
-
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_SOURCE = BASE_DIR / "bus.jpg"
 DEFAULT_MODEL = BASE_DIR / "yolo26n.pt"
@@ -22,9 +21,15 @@ DEFAULT_OUTPUT_IMAGE_DIR = BASE_DIR / "runs/detect/person_output"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Detect people and extract attributes")
-    parser.add_argument("--source", default=str(DEFAULT_SOURCE), help="Input image path")
-    parser.add_argument("--pdmodel", default=str(DEFAULT_PDMODEL), help="Paddle pdmodel path")
-    parser.add_argument("--pdiparams", default=str(DEFAULT_PDIPARAMS), help="Paddle pdiparams path")
+    parser.add_argument(
+        "--source", default=str(DEFAULT_SOURCE), help="Input image path"
+    )
+    parser.add_argument(
+        "--pdmodel", default=str(DEFAULT_PDMODEL), help="Paddle pdmodel path"
+    )
+    parser.add_argument(
+        "--pdiparams", default=str(DEFAULT_PDIPARAMS), help="Paddle pdiparams path"
+    )
     parser.add_argument(
         "--output-json",
         default=str(DEFAULT_OUTPUT_JSON),
@@ -50,7 +55,9 @@ def run() -> None:
     )
 
     model = YOLO(str(DEFAULT_MODEL))
-    result = model.predict(source=str(source_path), conf=0.25, classes=[0], verbose=False)[0]
+    result = model.predict(
+        source=str(source_path), conf=0.25, classes=[0], verbose=False
+    )[0]
 
     output_image_dir = DEFAULT_OUTPUT_IMAGE_DIR
     output_image_dir.mkdir(parents=True, exist_ok=True)
@@ -60,7 +67,9 @@ def run() -> None:
 
     person_boxes: list[list[float]] = []
     if result.boxes is not None and len(result.boxes) > 0:
-        person_boxes = [[float(v) for v in raw_box] for raw_box in result.boxes.xyxy.cpu().tolist()]
+        person_boxes = [
+            [float(v) for v in raw_box] for raw_box in result.boxes.xyxy.cpu().tolist()
+        ]
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     persons: list[dict[str, object]] = []
@@ -86,7 +95,9 @@ def run() -> None:
 
     output_path = Path(args.output_json)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(persons, ensure_ascii=False, indent=2), encoding="utf-8")
+    output_path.write_text(
+        json.dumps(persons, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     print(f"done: persons={len(persons)}")
     print(f"json saved: {output_path}")

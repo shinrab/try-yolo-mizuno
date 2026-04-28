@@ -65,7 +65,9 @@ class PaddleAttributeExtractor:
         mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
         std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
         data = (data - mean) / std
-        input_data = np.expand_dims(data.transpose((2, 0, 1)), axis=0).astype(np.float32)
+        input_data = np.expand_dims(data.transpose((2, 0, 1)), axis=0).astype(
+            np.float32
+        )
 
         input_handle = self.predictor.get_input_handle(self.input_name)
         input_handle.copy_from_cpu(input_data)

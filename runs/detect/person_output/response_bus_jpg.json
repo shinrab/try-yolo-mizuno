@@ -1,0 +1,94 @@
+[
+  {
+    "frame_index": 0,
+    "image_name": "bus.jpg",
+    "image_path": "bus.jpg",
+    "annotated_image_path": "runs/detect/person_output/bus_jpg/bus.jpg",
+    "persons": [
+      {
+        "person_id": 1,
+        "bbox": [
+          222.0,
+          405.0,
+          345.0,
+          862.0
+        ],
+        "attributes": {
+          "hat": false,
+          "glasses": true,
+          "short_sleeve": false,
+          "long_sleeve": true,
+          "trousers": true,
+          "handbag": false,
+          "shoulderbag": false,
+          "backpack": false,
+          "hold_objects_in_front": false
+        },
+        "timestamp": "2026-05-12 14:58:18"
+      },
+      {
+        "person_id": 2,
+        "bbox": [
+          48.0,
+          399.0,
+          239.0,
+          903.0
+        ],
+        "attributes": {
+          "hat": false,
+          "glasses": false,
+          "short_sleeve": false,
+          "long_sleeve": true,
+          "trousers": true,
+          "handbag": true,
+          "shoulderbag": false,
+          "backpack": false,
+          "hold_objects_in_front": false
+        },
+        "timestamp": "2026-05-12 14:58:18"
+      },
+      {
+        "person_id": 3,
+        "bbox": [
+          671.0,
+          392.0,
+          810.0,
+          879.0
+        ],
+        "attributes": {
+          "hat": false,
+          "glasses": false,
+          "short_sleeve": false,
+          "long_sleeve": false,
+          "trousers": true,
+          "handbag": false,
+          "shoulderbag": false,
+          "backpack": false,
+          "hold_objects_in_front": false
+        },
+        "timestamp": "2026-05-12 14:58:18"
+      },
+      {
+        "person_id": 4,
+        "bbox": [
+          0.0,
+          557.0,
+          60.0,
+          870.0
+        ],
+        "attributes": {
+          "hat": false,
+          "glasses": false,
+          "short_sleeve": false,
+          "long_sleeve": true,
+          "trousers": true,
+          "handbag": false,
+          "shoulderbag": false,
+          "backpack": false,
+          "hold_objects_in_front": false
+        },
+        "timestamp": "2026-05-12 14:58:18"
+      }
+    ]
+  }
+]

@@ -189,7 +189,9 @@ def build_result_record(
     annotated_image_path: Path,
 ) -> dict[str, object]:
     detection_found = detection is not None
-    passes = bool(detection_found and similarity is not None and similarity >= reid_threshold)
+    passes = bool(
+        detection_found and similarity is not None and similarity >= reid_threshold
+    )
 
     failure_reason = ""
     if not detection_found:
@@ -209,7 +211,9 @@ def build_result_record(
         "detection_found": detection_found,
         "selected_bbox": detection["bbox"] if detection_found else None,
         "selected_bbox_area_ratio": (
-            bbox_area_ratio(detection, int(resolution["width"]), int(resolution["height"]))
+            bbox_area_ratio(
+                detection, int(resolution["width"]), int(resolution["height"])
+            )
             if detection_found
             else None
         ),
@@ -241,9 +245,7 @@ def write_csv(results: list[dict[str, object]], output_path: Path) -> None:
             writer.writerow({fieldname: result[fieldname] for fieldname in fieldnames})
 
 
-def write_graph(
-    results: list[dict[str, object]], output_path: Path
-) -> None:
+def write_graph(results: list[dict[str, object]], output_path: Path) -> None:
     labels = [str(result["resolution_label"]) for result in results]
     similarities = [
         (
@@ -254,7 +256,9 @@ def write_graph(
         for result in results
     ]
     confidences = [
-        float(result["yolo_confidence"]) if result["yolo_confidence"] is not None else None
+        float(result["yolo_confidence"])
+        if result["yolo_confidence"] is not None
+        else None
         for result in results
     ]
     pass_flags = [bool(result["pass_fail"]) for result in results]
@@ -282,7 +286,9 @@ def write_graph(
             upper = min(1.05, midpoint + 0.025)
         return lower, upper
 
-    similarity_values = [value if value is not None else float("nan") for value in similarities]
+    similarity_values = [
+        value if value is not None else float("nan") for value in similarities
+    ]
     axes[0].plot(positions, similarity_values, marker="o", linewidth=2, color="#1f77b4")
     for pos, value, passed in zip(positions, similarities, pass_flags):
         if value is None:
@@ -301,7 +307,9 @@ def write_graph(
     axes[0].grid(True, axis="y", alpha=0.3)
     axes[0].set_title("Quality Evaluation Summary")
 
-    confidence_values = [value if value is not None else float("nan") for value in confidences]
+    confidence_values = [
+        value if value is not None else float("nan") for value in confidences
+    ]
     axes[1].plot(positions, confidence_values, marker="s", linewidth=2, color="#9467bd")
     for pos, value, passed in zip(positions, confidences, pass_flags):
         if value is None:
@@ -410,7 +418,9 @@ def run() -> None:
             )
 
     if reference_index is None or reference_detection is None:
-        raise ValueError("no detected person found in any image under the source directory")
+        raise ValueError(
+            "no detected person found in any image under the source directory"
+        )
 
     reference_entry = image_entries[reference_index]
     reference_path = reference_entry["image_path"]
@@ -449,7 +459,9 @@ def run() -> None:
         )
         annotated_image_path = annotated_dir / image_path.name
         label = (
-            f"sim:{similarity:.3f}" if detection is not None and similarity is not None else "no-match"
+            f"sim:{similarity:.3f}"
+            if detection is not None and similarity is not None
+            else "no-match"
         )
         annotate_selected_detection(
             analysis["image_bgr"],

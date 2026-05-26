@@ -1,0 +1,24 @@
+{
+  "reference_image_name": "person_8192x8192.jpg",
+  "reference_resolution": "8192x8192",
+  "reference_selection_reason": "highest_resolution_with_detection",
+  "reid_threshold": 0.7,
+  "total_images": 10,
+  "pass_count": 7,
+  "lowest_passing_resolution": "128x128",
+  "lowest_passing_image": "person_128x128.jpg",
+  "first_failing_resolution": "64x64",
+  "first_failing_image": "person_64x64.jpg",
+  "ordered_results": [
+    "person_8192x8192.jpg",
+    "person_4096x4096.jpg",
+    "person_2048x2048.jpg",
+    "person_1024x1024.jpg",
+    "person_512x512.jpg",
+    "person_256x256.jpg",
+    "person_128x128.jpg",
+    "person_64x64.jpg",
+    "person_32x32.jpg",
+    "person_16x16.jpg"
+  ]
+}

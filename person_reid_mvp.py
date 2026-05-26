@@ -10,6 +10,7 @@ import cv2
 from ultralytics import YOLO
 
 from paddle_attr import PaddleAttributeExtractor
+from person_pipeline import analyze_image
 from reid_utils import ReIDEmbeddingExtractor, SimpleReIDMatcher
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -101,18 +102,6 @@ def resolve_source_paths(source: str) -> list[Path]:
     return matched_paths
 
 
-def clamp_bbox(
-    bbox_xyxy: list[float], image_w: int, image_h: int
-) -> tuple[int, int, int, int] | None:
-    x1 = max(0, min(int(round(bbox_xyxy[0])), image_w - 1))
-    y1 = max(0, min(int(round(bbox_xyxy[1])), image_h - 1))
-    x2 = max(0, min(int(round(bbox_xyxy[2])), image_w))
-    y2 = max(0, min(int(round(bbox_xyxy[3])), image_h))
-    if x2 <= x1 or y2 <= y1:
-        return None
-    return x1, y1, x2, y2
-
-
 def annotate_person_ids(
     image_bgr: cv2.typing.MatLike, persons: list[dict[str, object]]
 ) -> None:
@@ -141,43 +130,20 @@ def process_frame(
     matcher: SimpleReIDMatcher,
     output_image_dir: Path,
 ) -> dict[str, object]:
-    image_bgr = cv2.imread(str(source_path))
-    if image_bgr is None:
-        raise ValueError(f"failed to load image: {source_path}")
-
-    image_h, image_w = image_bgr.shape[:2]
-    result = model.predict(
-        source=str(source_path), conf=0.25, classes=[0], verbose=False
-    )[0]
+    analysis = analyze_image(
+        source_path=source_path,
+        model=model,
+        attr_extractor=attr_extractor,
+        reid_extractor=reid_extractor,
+    )
 
     output_image_path = output_image_dir / source_path.name
-    annotated = result.plot()
-
-    person_boxes: list[list[float]] = []
-    if result.boxes is not None and len(result.boxes) > 0:
-        person_boxes = [
-            [float(v) for v in raw_box] for raw_box in result.boxes.xyxy.cpu().tolist()
-        ]
+    image_h = int(analysis["image_height"])
+    image_w = int(analysis["image_width"])
+    annotated = analysis["annotated_image"]
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    detections: list[dict[str, object]] = []
-    for person_box in person_boxes:
-        clamped_bbox = clamp_bbox(person_box, image_w, image_h)
-        if clamped_bbox is None:
-            continue
-
-        x1, y1, x2, y2 = clamped_bbox
-
-        crop_bgr = image_bgr[y1:y2, x1:x2]
-        crop_rgb = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2RGB)
-        attributes = attr_extractor.predict_attributes(crop_rgb)
-        detections.append(
-            {
-                "bbox": [float(x1), float(y1), float(x2), float(y2)],
-                "feature": reid_extractor.extract(crop_bgr),
-                "attributes": attributes,
-            }
-        )
+    detections = analysis["detections"]
 
     matcher.assign(
         detections,
@@ -192,6 +158,7 @@ def process_frame(
             {
                 "person_id": detection["person_id"],
                 "bbox": detection["bbox"],
+                "yolo_confidence": detection["yolo_confidence"],
                 "attributes": detection["attributes"],
                 "timestamp": timestamp,
             }

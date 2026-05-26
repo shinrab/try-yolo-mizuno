@@ -1,0 +1,24 @@
+{
+  "reference_image_name": "sample_2048x2048.jpg",
+  "reference_resolution": "2048x2048",
+  "reference_selection_reason": "highest_resolution_with_detection",
+  "reid_threshold": 0.7,
+  "total_images": 10,
+  "pass_count": 1,
+  "lowest_passing_resolution": "2048x2048",
+  "lowest_passing_image": "sample_2048x2048.jpg",
+  "first_failing_resolution": "8192x8192",
+  "first_failing_image": "sample_8192x8192.jpg",
+  "ordered_results": [
+    "sample_8192x8192.jpg",
+    "sample_4096x4096.jpg",
+    "sample_2048x2048.jpg",
+    "sample_1024x1024.jpg",
+    "sample_512x512.jpg",
+    "sample_256x256.jpg",
+    "sample_128x128.jpg",
+    "sample_64x64.jpg",
+    "sample_32x32.jpg",
+    "sample_16x16.jpg"
+  ]
+}

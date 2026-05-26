@@ -1,0 +1,11 @@
+image_name,resolution_label,detection_found,yolo_confidence,reid_similarity_to_reference,pass_fail,failure_reason
+sample_8192x8192.jpg,8192x8192,False,,,False,no_detection
+sample_4096x4096.jpg,4096x4096,False,,,False,no_detection
+sample_2048x2048.jpg,2048x2048,True,0.258661150932312,1.0,True,
+sample_1024x1024.jpg,1024x1024,False,,,False,no_detection
+sample_512x512.jpg,512x512,False,,,False,no_detection
+sample_256x256.jpg,256x256,False,,,False,no_detection
+sample_128x128.jpg,128x128,False,,,False,no_detection
+sample_64x64.jpg,64x64,False,,,False,no_detection
+sample_32x32.jpg,32x32,False,,,False,no_detection
+sample_16x16.jpg,16x16,False,,,False,no_detection

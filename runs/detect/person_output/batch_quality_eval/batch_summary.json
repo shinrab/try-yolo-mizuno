@@ -1,0 +1,72 @@
+[
+  {
+    "resolution": 8192,
+    "detection_rate": 1.0,
+    "mean_confidence": 0.3801398996219217,
+    "mean_similarity": 1.0000000328894156,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 4096,
+    "detection_rate": 0.9073705179282868,
+    "mean_confidence": 0.39284146165743095,
+    "mean_similarity": 0.9918325810348687,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 2048,
+    "detection_rate": 0.8934262948207171,
+    "mean_confidence": 0.40453356059232815,
+    "mean_similarity": 0.9873368205168308,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 1024,
+    "detection_rate": 0.8346613545816733,
+    "mean_confidence": 0.4107149006856654,
+    "mean_similarity": 0.9789047862151926,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 512,
+    "detection_rate": 0.7430278884462151,
+    "mean_confidence": 0.4157869202601686,
+    "mean_similarity": 0.9734802548910914,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 256,
+    "detection_rate": 0.6075697211155379,
+    "mean_confidence": 0.4254178094570754,
+    "mean_similarity": 0.9590573689976677,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 128,
+    "detection_rate": 0.5747011952191236,
+    "mean_confidence": 0.41584004262910973,
+    "mean_similarity": 0.9202468049174991,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 64,
+    "detection_rate": 0.043824701195219126,
+    "mean_confidence": 0.35870449380441144,
+    "mean_similarity": 0.6909850612282753,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 32,
+    "detection_rate": 0.0,
+    "mean_confidence": 0,
+    "mean_similarity": 0,
+    "sample_count": 1004
+  },
+  {
+    "resolution": 16,
+    "detection_rate": 0.0,
+    "mean_confidence": 0,
+    "mean_similarity": 0,
+    "sample_count": 1004
+  }
+]

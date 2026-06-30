@@ -1,3 +1,14 @@
 datasets/Market-1501
 datasets/resized_samples
 .DS_Store
+__pycache__
+*.pyc
+*.pkl
+*.log
+*.h5
+*.ckpt
+*.pth
+*.onnx
+*.zip
+*.tar.gz
+*.tar
